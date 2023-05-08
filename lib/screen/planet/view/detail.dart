@@ -25,7 +25,7 @@ class _DetailsState extends State<Details> with SingleTickerProviderStateMixin {
     super.initState();
     animationController = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 4),
+      duration: Duration(seconds: 10),
     );
     rotate = Tween<double>(begin: 10, end: 10).animate(animationController!);
     animationController!.repeat();
@@ -39,47 +39,62 @@ class _DetailsState extends State<Details> with SingleTickerProviderStateMixin {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.blue.shade700,
-        body: Column(
+        appBar: AppBar(
+          title: Text("Details"),
+        ),
+        body: Stack(
           children: [
-            Expanded(
-              child: Container(
-                alignment: Alignment.center,
-                child: Transform.rotate(
-                    angle: animationController!.value * 2 * pi,
-                    child:
-                        Image.network("${controller.modelList[index].Image}")),
-              ),
-            ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(20),
-                child: Container(
-                  alignment: Alignment.center,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "${controller.modelList[index].Name}",
-                        style: TextStyle(
-                            fontSize: 25,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.white),
-                      ),
-                      SizedBox(
-                        height: 2,
-                      ),
-                      Text(
-                        "${controller.modelList[index].Gname}",
-                        style: TextStyle(
-                            fontSize: 15,
-                            // fontWeight: FontWeight.w500,
-                            color: Colors.white60),
-                      ),
-                    ],
+            Column(
+              children: [
+                Expanded(
+                  child: Container(
+                    alignment: Alignment.center,
+                    child: Image.asset("${controller.modelList[index].BGI}",fit: BoxFit.cover,)
                   ),
                 ),
-              ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: Container(
+                      alignment: Alignment.center,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          ListTile(
+                            title: Text(
+                              "${controller.modelList[index].Name}",
+                              style: TextStyle(
+                                  fontSize: 25,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.white),
+                            ),
+                            subtitle: Text(
+                              "${controller.modelList[index].Gname}",
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.white),
+                            ),
+                          ),
+                          SizedBox(height: 10,),
+                          Text("${controller.modelList[index].Description}",style: TextStyle(
+                              // fontSize: 25,
+                              // fontWeight: FontWeight.w500,
+                              color: Colors.white),),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Align(
+              alignment: Alignment.center,
+              child: Transform.rotate(
+                  angle: animationController!.value * 2 * pi,
+                  child:
+                  Image.network("${controller.modelList[index].Image}",height: 200,width: 200,)),
             ),
           ],
         ),

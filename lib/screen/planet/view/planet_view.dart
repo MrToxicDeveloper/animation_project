@@ -23,7 +23,7 @@ class _PlanetScreenState extends State<PlanetScreen>
   void initState() {
     super.initState();
     animationController =
-        AnimationController(vsync: this, duration: Duration(seconds: 4),);
+        AnimationController(vsync: this, duration: Duration(seconds: 7),);
     rotate = Tween<double>(begin: 10, end: 10).animate(animationController!);
     animationController!.repeat();
     animationController!.addListener(() {
